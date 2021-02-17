@@ -43,6 +43,7 @@ func main() {
 
 	// Create a HTTP router object which contains a gin.Engine
 	// The default gin.Engine has the Logger and Recovery middleware attached
+	gin.DisableConsoleColor()
 	router := handler.NewHandler(gin.Default(), config, sv)
 	router.CreateEndpoints()
 
