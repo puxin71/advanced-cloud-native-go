@@ -27,7 +27,5 @@ FROM scratch
 # Copy our static executable.
 COPY --from=builder /go/bin/Gin-Web /go/bin/Gin-Web
 
-EXPOSE 3000
-
 # Run the hello binary.
 ENTRYPOINT ["/go/bin/Gin-Web"]
