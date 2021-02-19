@@ -1,0 +1,9 @@
+version: '3.9'
+services:
+  gin-web:
+    build: .
+    image: gin-web:1.0.1
+    environment: 
+    - PORT=3000
+    ports: 
+    - "3000:3000"
