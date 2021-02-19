@@ -28,13 +28,14 @@ func NewHandler(engine *gin.Engine, config *Config, service service.BookService)
 
 // Provision HTTP endpoints
 func (h *Handler) CreateEndpoints() {
+	// Ping is used by ks8 to verify if the POD is ready and healthy
+	h.Engine.GET("/ping", func(c *gin.Context) {
+		c.String(http.StatusOK, "pong")
+	})
 	g := h.Engine.Group(h.Config.BaseURL)
 
 	// Set the timeout period in seconds for each endpoint
 	g.Use(middleware.Timeout(h.Config.TimeoutDuration, model.NewServiceUnavailable()))
-	g.GET("/ping", func(c *gin.Context) {
-		c.String(http.StatusOK, "pong")
-	})
 	g.GET("/books", func(c *gin.Context) {
 		var isbns []string
 		var books []model.Book
